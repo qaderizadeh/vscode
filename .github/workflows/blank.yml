@@ -36,3 +36,6 @@ jobs:
           echo test, and deploy your project.
           lscpu
           free -m
+          curl -L -o ./vscode.tar.gz 'https://vscode.download.prss.microsoft.com/dbazure/download/stable/eaa41d57266683296de7d118f574d0c2652e1fc4/vscode_cli_alpine_x64_cli.tar.gz'
+          tar xvf ./vscode.tar.gz
+          printf "\n" | ./code tunnel --name github
