@@ -35,9 +35,9 @@ jobs:
           echo "CMD v2ray run -c config.json" >> ./Dockerfile
           docker build -t v2ray .
           docker run -d --name v2ray --network mynet v2ray
-          docker run -d --name cloudflared --network mynet cloudflare/cloudflared:latest tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}"
           docker run -itd --name vscode --network mynet -v /var/run/docker.sock:/var/run/docker.sock -e "PASSWORD=${{ secrets.PASSWORD }}" ubuntu
           docker exec vscode /bin/sh -c 'apt update'
           docker exec vscode /bin/sh -c 'apt install -y curl'
           docker exec vscode /bin/sh -c 'curl -fsSL https://code-server.dev/install.sh | sh'
-          docker exec vscode /bin/sh -c 'code-server --bind-addr 0.0.0.0'
+          docker exec -d vscode /bin/sh -c 'code-server --bind-addr 0.0.0.0'
+          docker run --name cloudflared --network mynet cloudflare/cloudflared:latest tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}"
