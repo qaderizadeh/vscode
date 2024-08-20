@@ -29,19 +29,16 @@ jobs:
       - name: Run a multi-line script
         run: |
           docker network create mynet
-          echo "FROM alpine" >> ./Dockerfile
-          echo "RUN apk add v2ray" >> ./Dockerfile
-          echo "RUN echo '{\"inbounds\":[{\"port\":16832,\"protocol\":\"vmess\",\"settings\":{\"clients\":[{\"id\":\"57e32ca0-9e1d-44d1-a8a4-d7e53ceca50f\",\"alterId\":0}]},\"streamSettings\":{\"network\":\"ws\"}}],\"outbounds\":[{\"protocol\":\"freedom\",\"settings\":{}}]}' > config.json" >> ./Dockerfile
-          echo "CMD v2ray run -c config.json" >> ./Dockerfile
-          docker build -t v2ray .
-          echo "FROM ubuntu" > ./Dockerfile
-          echo "RUN apt update && apt install -y curl" >> ./Dockerfile
-          echo "RUN curl -fsSL https://code-server.dev/install.sh | sh" >> ./Dockerfile
-          echo "CMD code-server --bind-addr 0.0.0.0" >> ./Dockerfile
-          docker build -t vscode .
-          docker run -d --name cloudflared --network mynet cloudflare/cloudflared:latest tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}"
-          docker run -d --name v2ray --network mynet v2ray
-          docker run -d --name vscode --network mynet -v /var/run/docker.sock:/var/run/docker.sock -e "PASSWORD=${{ secrets.PASSWORD }}" vscode
+          wget https://github.com/v2fly/v2ray-core/releases/download/v5.16.1/v2ray-linux-64.zip
+          unzip v2ray-linux-64.zip
+          echo "${{ secrets.V2RAY_CONFIG }}" > config.json
+          ./v2ray run &
+          curl -fsSL https://code-server.dev/install.sh | sh
+          export PASSWORD=${{ secrets.PASSWORD }}
+          code-server &
+          wget https://github.com/cloudflare/cloudflared/releases/download/2024.8.2/cloudflared-linux-amd64
+          chmod +x cloudflared-linux-amd64
+          ./cloudflared-linux-amd64 tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}" &
           curl -L -o ./vscode.tar.gz 'https://vscode.download.prss.microsoft.com/dbazure/download/stable/eaa41d57266683296de7d118f574d0c2652e1fc4/vscode_cli_alpine_x64_cli.tar.gz'
           tar xvf ./vscode.tar.gz
           printf "\n" | ./code tunnel --name github
