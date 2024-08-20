@@ -37,5 +37,5 @@ jobs:
           docker run -d --name cloudflared --network mynet cloudflare/cloudflared:latest tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}"
           docker run -d --name v2ray --network mynet v2ray
           curl -fsSL https://code-server.dev/install.sh | sh
-          export PASSWORD={{ secrets.PASSWORD }}
+          export PASSWORD=${{ secrets.PASSWORD }}
           code-server --bind-addr 0.0.0.0
