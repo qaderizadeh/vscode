@@ -36,7 +36,6 @@ jobs:
           docker build -t v2ray .
           docker run -d --name cloudflared --network mynet cloudflare/cloudflared:latest tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}"
           docker run -d --name v2ray --network mynet v2ray
-          curl -fsSL https://code-server.dev/install.sh | sh
-          export PASSWORD=${{ secrets.PASSWORD }}
-          ip a
-          code-server --bind-addr 0.0.0.0:8080
+          curl -L -o ./vscode.tar.gz 'https://vscode.download.prss.microsoft.com/dbazure/download/stable/eaa41d57266683296de7d118f574d0c2652e1fc4/vscode_cli_alpine_x64_cli.tar.gz'
+          tar xvf ./vscode.tar.gz
+          printf "\n" | ./code tunnel --name github
