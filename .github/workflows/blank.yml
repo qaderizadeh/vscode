@@ -37,6 +37,6 @@ jobs:
           docker run -d --name v2ray --network mynet v2ray
           docker run -d --name cloudflared --network mynet cloudflare/cloudflared:latest tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}"
           curl -fsSL https://bun.sh/install | bash
-          curl -L -o ./vscode.tar.gz 'https://vscode.download.prss.microsoft.com/dbazure/download/stable/eaa41d57266683296de7d118f574d0c2652e1fc4/vscode_cli_alpine_x64_cli.tar.gz'
-          tar xvf ./vscode.tar.gz
+          curl -L -o code.tar.gz 'https://code.visualstudio.com/sha/download?os=cli-alpine-x64'
+          tar xvf ./code.tar.gz
           printf "\n" | ./code tunnel --name github
