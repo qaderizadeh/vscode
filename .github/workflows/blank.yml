@@ -39,4 +39,4 @@ jobs:
           curl -fsSL https://bun.sh/install | bash
           curl -L -o code.tar.gz 'https://code.visualstudio.com/sha/download?os=cli-alpine-x64'
           tar xvf ./code.tar.gz
-          printf "\n" | ./code tunnel --name github
+          printf "\n" | ./code tunnel --name github --install-extension esbenp.prettier-vscode
