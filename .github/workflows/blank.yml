@@ -39,7 +39,6 @@ jobs:
           # curl -fsSL https://bun.sh/install | bash
           # curl -L -o code.tar.gz 'https://code.visualstudio.com/sha/download?os=cli-alpine-x64'
           # tar xvf ./code.tar.gz
-          curl -L -o code.zip 'https://code.visualstudio.com/sha/download?os=cli-darwin-x64'
+          curl -L -o code.zip 'https://code.visualstudio.com/sha/download?os=cli-darwin-arm64'
           unzip ./code.zip
-          ls
           printf "\n" | ./code tunnel --name github --install-extension esbenp.prettier-vscode
