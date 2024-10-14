@@ -39,6 +39,7 @@ jobs:
           # curl -fsSL https://bun.sh/install | bash
           # curl -L -o code.tar.gz 'https://code.visualstudio.com/sha/download?os=cli-alpine-x64'
           # tar xvf ./code.tar.gz
+          
           # curl -L -o code.zip 'https://code.visualstudio.com/sha/download?os=cli-darwin-arm64'
           # unzip ./code.zip
           # printf "\n" | ./code tunnel --name github --install-extension esbenp.prettier-vscode
@@ -47,10 +48,5 @@ jobs:
           mkdir ~/.anydesk
           echo ad.anynet.pwd_hash=35d260026842d04f4618ce5908f6a3787bafcc72a8b817d31f707ee07e0bd0d0 >> ~/.anydesk/service.conf
           echo ad.anynet.pwd_salt=4212ce226a629841a17e1988c239d46e >> ~/.anydesk/service.conf
-          # nohup /Applications/AnyDesk.app/Contents/MacOS/AnyDesk &
-          # sleep 30
-          # /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id
-          # tail -F anything
-
-          node -e "setTimeout(()=>{require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id', (err, stdout, stderr)=>{console.log(stdout)} )},30000);" &
+          node -e "setTimeout(()=>{require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id', (err, stdout, stderr)=>{console.log(stdout)} )},10000);" &
           /Applications/AnyDesk.app/Contents/MacOS/AnyDesk
