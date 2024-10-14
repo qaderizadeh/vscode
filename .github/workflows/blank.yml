@@ -52,6 +52,4 @@ jobs:
           # /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id
           # tail -F anything
 
-          node -e "require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk')"
-          sleep 30
-          /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id
+          node -e "setTimeout(()=>{require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id')},3000); require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk')"
