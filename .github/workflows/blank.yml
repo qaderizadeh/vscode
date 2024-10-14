@@ -47,7 +47,7 @@ jobs:
           echo ad.anynet.pwd_hash=35d260026842d04f4618ce5908f6a3787bafcc72a8b817d31f707ee07e0bd0d0 >> ~/.anydesk/service.conf
           echo ad.anynet.pwd_salt=4212ce226a629841a17e1988c239d46e >> ~/.anydesk/service.conf
           # echo "sleep 5 ; /Applications/AnyDesk.app/Contents/MacOS/AnyDesk" | at now
-          open -gj -a /Applications/AnyDesk.app
+          /Applications/AnyDesk.app/Contents/MacOS/AnyDesk&
           sleep 60
           /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id
-          sleep 20000
+          tail -F anything
