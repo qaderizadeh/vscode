@@ -4,13 +4,6 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -18,7 +11,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,25 +21,25 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          # docker network create mynet
-          # echo "FROM alpine" >> ./Dockerfile
-          # echo "RUN apk add v2ray" >> ./Dockerfile
-          # echo "RUN echo '{\"inbounds\":[{\"port\":16832,\"protocol\":\"vmess\",\"settings\":{\"clients\":[{\"id\":\"57e32ca0-9e1d-44d1-a8a4-d7e53ceca50f\",\"alterId\":0}]},\"streamSettings\":{\"network\":\"ws\"}}],\"outbounds\":[{\"protocol\":\"freedom\",\"settings\":{}}]}' > config.json" >> ./Dockerfile
-          # echo "CMD v2ray run -c config.json" >> ./Dockerfile
-          # docker build -t v2ray .
-          # docker run -d --name v2ray --network mynet v2ray
-          # docker run -d --name cloudflared --network mynet cloudflare/cloudflared:latest tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}"
-          # curl -fsSL https://bun.sh/install | bash
-          # curl -L -o code.tar.gz 'https://code.visualstudio.com/sha/download?os=cli-alpine-x64'
-          # tar xvf ./code.tar.gz
+          docker network create mynet
+          echo "FROM alpine" >> ./Dockerfile
+          echo "RUN apk add v2ray" >> ./Dockerfile
+          echo "RUN echo '{\"inbounds\":[{\"port\":16832,\"protocol\":\"vmess\",\"settings\":{\"clients\":[{\"id\":\"57e32ca0-9e1d-44d1-a8a4-d7e53ceca50f\",\"alterId\":0}]},\"streamSettings\":{\"network\":\"ws\"}}],\"outbounds\":[{\"protocol\":\"freedom\",\"settings\":{}}]}' > config.json" >> ./Dockerfile
+          echo "CMD v2ray run -c config.json" >> ./Dockerfile
+          docker build -t v2ray .
+          docker run -d --name v2ray --network mynet v2ray
+          docker run -d --name cloudflared --network mynet cloudflare/cloudflared:latest tunnel --no-autoupdate run --token "${{ secrets.CF_TUNNEL_TOKEN }}"
+          curl -fsSL https://bun.sh/install | bash
+          curl -L -o code.tar.gz 'https://code.visualstudio.com/sha/download?os=cli-alpine-x64'
+          tar xvf ./code.tar.gz
           
           # curl -L -o code.zip 'https://code.visualstudio.com/sha/download?os=cli-darwin-arm64'
           # unzip ./code.zip
-          # printf "\n" | ./code tunnel --name github --install-extension esbenp.prettier-vscode
+          printf "\n" | ./code tunnel --name github --install-extension esbenp.prettier-vscode
           
-          brew install anydesk
-          mkdir ~/.anydesk
-          echo ad.anynet.pwd_hash=35d260026842d04f4618ce5908f6a3787bafcc72a8b817d31f707ee07e0bd0d0 >> ~/.anydesk/service.conf
-          echo ad.anynet.pwd_salt=4212ce226a629841a17e1988c239d46e >> ~/.anydesk/service.conf
-          node -e "setTimeout(()=>{require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id', (err, stdout, stderr)=>{console.log(stdout)} )},10000);" &
-          /Applications/AnyDesk.app/Contents/MacOS/AnyDesk
+          # brew install anydesk
+          # mkdir ~/.anydesk
+          # echo ad.anynet.pwd_hash=35d260026842d04f4618ce5908f6a3787bafcc72a8b817d31f707ee07e0bd0d0 >> ~/.anydesk/service.conf
+          # echo ad.anynet.pwd_salt=4212ce226a629841a17e1988c239d46e >> ~/.anydesk/service.conf
+          # node -e "setTimeout(()=>{require('child_process').exec('/Applications/AnyDesk.app/Contents/MacOS/AnyDesk --get-id', (err, stdout, stderr)=>{console.log(stdout)} )},10000);" &
+          # /Applications/AnyDesk.app/Contents/MacOS/AnyDesk
